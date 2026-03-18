@@ -6,8 +6,8 @@ newproj init mi-app          # opcional: --github para crear un repositorio en G
 # Entra al directorio del proyecto
 cd mi-app
 
-# Inicia la aplicación (ejecuta startApp.sh)
-# El script inicia el servidor de desarrollo y abre la aplicación en el navegador predeterminado
+# Inicie la aplicación (ejecuta `./startApp.sh`)
+# El comando `newproj start` ejecuta el script `./startApp.sh`, que inicia el servidor de desarrollo y abre la aplicación en el navegador predeterminado
 newproj start
 
 # Para recargar la aplicación, ejecuta el script nuevamente o presiona Ctrl+R en la ventana del navegador

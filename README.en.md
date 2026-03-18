@@ -6,8 +6,8 @@ newproj init meu-app          # opcional: --github para criar o repositório no 
 # Entre na pasta do projeto
 cd meu-app
 
-# Inicie a aplicação (executa startApp.sh)
-# O script inicia o servidor de desenvolvimento e abre a aplicação no navegador padrão
+# Start the application (executes `./startApp.sh`)
+# The command `newproj start` runs the script `./startApp.sh`, which starts the development server and opens the application in the default browser
 newproj start
 
 # Para recarregar a aplicação, execute o script novamente ou pressione Ctrl+R na janela do navegador
