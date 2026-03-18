@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup Guide – new-project-cli</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:2rem;}
+    .lang{float:right;margin-top:-2rem;}
+    .tab{display:inline-block;margin-right:1rem;padding:.5rem 1rem;background:#f0f0f0;border-radius:4px;cursor:pointer;}
+    .tab.active{background:#333;color:#fff;}
+    .content{margin-top:1rem;display:none;}
+    .content.active{display:block;}
+  </style>
+</head>
+<body>
+  <div class="lang">
+    <select id="langSelect">
+      <option value="en" selected>English</option>
+      <option value="pt">Português</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+  <h1>Setup Guide</h1>
+  <div id="tabs">
+    <div class="tab active" data-lang="en">English</div>
+    <div class="tab" data-lang="pt">Português</div>
+    <div class="tab" data-lang="es">Español</div>
+  </div>
+  <div id="contents">
+    <div class="content active" data-lang="en">
+      <h2>1. Install Globally</h2>
+      <pre><code>npm i -g new-project-cli</code></pre>
+      <h2>2. Create a Project</h2>
+      <pre><code>newproj init my-app
+</code></pre>
+      <p>You can optionally create a GitHub repo with <code>--github</code> flag.</p>
+      <h2>3. Start / Stop / Clear</h2>
+      <pre><code>cd my-app
+newproj start
+newproj stop
+newproj clear
+</code></pre>
+    </div>
+    <div class="content" data-lang="pt">
+      <h2>1. Instalar Globalmente</h2>
+      <pre><code>npm i -g new-project-cli</code></pre>
+      <h2>2. Criar um Projeto</h2>
+      <pre><code>newproj init meu-app
+</code></pre>
+      <p>Você pode opcionalmente criar um repositório GitHub com a flag <code>--github</code>.</p>
+      <h2>3. Iniciar / Parar / Limpar</h2>
+      <pre><code>cd meu-app
+newproj start
+newproj stop
+newproj clear
+</code></pre>
+    </div>
+    <div class="content" data-lang="es">
+      <h2>1. Instalar Globalmente</h2>
+      <pre><code>npm i -g new-project-cli</code></pre>
+      <h2>2. Crear un Proyecto</h2>
+      <pre><code>newproj init mi-app
+</code></pre>
+      <p>Puede crear opcionalmente un repositorio GitHub con la bandera <code>--github</code>.</p>
+      <h2>3. Iniciar / Detener / Limpiar</h2>
+      <pre><code>cd mi-app
+newproj start
+newproj stop
+newproj clear
+</code></pre>
+    </div>
+  </div>
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.content');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        const lang = tab.dataset.lang;
+        document.querySelector(`.content[data-lang="${lang}"]`).classList.add('active');
+        document.getElementById('langSelect').value = lang;
+      });
+    });
+    document.getElementById('langSelect').addEventListener('change', e => {
+      const lang = e.target.value;
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.lang === lang));
+      contents.forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+    });
+  </script>
+</body>
+</html>
