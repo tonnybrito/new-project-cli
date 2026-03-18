@@ -1,37 +1,49 @@
 # new-project-cli
 
-> A simple CLI tool for scaffolding new projects with a predefined template.
+A ferramenta CLI que gera projetos a partir de um **template** pré‑definido.
 
-## Features
-- **Global command**: `newproj` available after `npm i -g new-project-cli`.
-- **Commands**:
-  - `newproj init <name>` – Creates a new project folder, copies the template, installs dependencies, and initializes a git repo.
-  - `newproj start` – Executes `./startApp.sh` inside the current project.
-  - `newproj stop` – Executes `./stopApp.sh`.
-  - `newproj clear` – Executes `./clearCache.sh`.
-- **Documentation**: A multilingual guide in `docs/setup.html` with a language selector.
-- **Template**: The scaffold contains `builds`, `Commits`, `docs`, and shell scripts for managing the app.
+## O que é
+`new-project-cli` permite criar rapidamente a estrutura de um novo projeto (frontend, backend, scripts de build, etc.) com um único comando. Ele é ideal para:
 
-## Installation
+- *Prototipagem rápida* de aplicativos;
+- *Padronização* de projetos dentro de equipes;
+- *Automatização* de etapas repetitivas (instalação de dependências, inicialização de git, criação de repositório GitHub).
+
+## Para que serve
+- **Criar** a estrutura do projeto e instalar as dependências;
+- **Gerenciar** a aplicação (iniciar, parar, limpar cache) com scripts simples;
+- **Documentar** a instalação e uso em três idiomas (PT, EN, ES) com fácil troca de idioma.
+
+## Instalação
 ```bash
+# Instalação global via npm
 npm i -g new-project-cli
 ```
 
-## Usage
+## Como usar
 ```bash
-# Create a new project
-newproj init my-app --github   # Optional GitHub repo creation
+# Crie um novo projeto chamado meu-app
+newproj init meu-app          # opcional: --github para criar o repositório no GitHub
 
-# Inside the project folder
-cd my-app
-newproj start   # Start the app
-newproj stop    # Stop the app
-newproj clear   # Clear cache
+# Entre na pasta do projeto
+cd meu-app
+
+# Inicie a aplicação (executa startApp.sh)
+newproj start
+
+# Pare a aplicação (executa stopApp.sh)
+newproj stop
+
+# Limpe o cache (executa clearCache.sh)
+newproj clear
 ```
 
-## Contributing
-Feel free to open issues or PRs. Please follow the standard commit style used in the repo.
+## Documentação em múltiplos idiomas
+Visite a página de configuração: `docs/setup.html`. Lá você pode trocar o idioma (Português, English, Español) e acompanhar cada passo.
+
+## Contribuindo
+Sinta‑se à vontade para abrir *issues* ou *pull requests*. Siga o padrão de commits do repositório.
 
 ---
 
-Generated with [Claude Code](https://claude.com/claude-code).
+Gerado com [Claude Code](https://claude.com/claude-code).
