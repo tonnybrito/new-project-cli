@@ -1,10 +1,6 @@
-# New-project-cli
+# New-project-cli (English)
 
-[Português](./README.pt.md) | [English](./README.en.md) | [Español](./README.es.md)
-
-# New-project-cli
-
-This CLI tool generates projects from a predefined **template**.
+This CLI generates projects from a predefined **template**.
 
 ## What it is
 `new-project-cli` allows you to quickly create the structure of a new project (frontend, backend, build scripts, etc.) with a single command. It is ideal for:
