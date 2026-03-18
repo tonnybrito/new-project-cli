@@ -1,53 +1,50 @@
-# New-project-cli
+[English](./README.en.md) | [Español](./README.es.md)
 
-[Português](./README.pt.md) | [English](./README.en.md) | [Español](./README.es.md)
+# New-project-cli (Português)
 
-# New-project-cli
+Criado por Tonny Brito - Devlandia Ltda e gerado por Claude Code (2026-03-18).
 
-This CLI tool generates projects from a predefined **template**.
+## O que é
+`new-project-cli` permite criar rapidamente a estrutura de um novo projeto (frontend, backend, scripts de build, etc.) com um único comando. Ele é ideal para:
+- *Prototipagem rápida* de aplicativos;
+- *Padronização* de projetos dentro de equipes;
+- *Automatização* de etapas repetitivas (instalar dependências, inicializar git, criar repositório no GitHub).
 
-## What it is
-`new-project-cli` allows you to quickly create the structure of a new project (frontend, backend, build scripts, etc.) with a single command. It is ideal for:
+## O que faz
+- **Criar** a estrutura do projeto e instalar dependências;
+- **Gerenciar** a aplicação (iniciar, parar, limpar cache) com scripts simples;
+- **Documentar** a instalação e uso em três idiomas (PT, EN, ES) com troca fácil de idioma.
 
-- *Rapid prototyping* of applications;
-- *Standardization* of projects within teams;
-- *Automation* of repetitive steps (installing dependencies, initializing git, creating a GitHub repository).
-
-## What it does
-- **Create** the project structure and install dependencies;
-- **Manage** the application (start, stop, clear cache) with simple scripts;
-- **Document** installation and usage in three languages (PT, EN, ES) with easy language switching.
-
-## Installation
+## Instalação
 ```bash
-# Global installation via npm
+# Instalação global via npm
 npm i -g new-project-cli
 ```
 
-## How to use
+## Como usar
 ```bash
-# Create a new project called my-app
-newproj init my-app          # optional: --github to create a GitHub repo
+# Crie um novo projeto chamado meu-app
+newproj init meu-app          # opcional: --github para criar o repositório no GitHub
 
-# Enter the project folder
-cd my-app
+# Entre na pasta do projeto
+cd meu-app
 
-# Start the application (runs startApp.sh)
+# Inicie a aplicação (executa startApp.sh)
 newproj start
 
-# Stop the application (runs stopApp.sh)
+# Pare a aplicação (executa stopApp.sh)
 newproj stop
 
-# Clear cache (runs clearCache.sh)
+# Limpe o cache (executa clearCache.sh)
 newproj clear
 ```
 
-## Documentation in multiple languages
-Visit the configuration page: `docs/setup.html`. There you can change the language (Português, English, Español) and follow each step.
+## Documentação em múltiplos idiomas
+Visite a página de configuração: `docs/setup.html`. Lá você pode trocar o idioma (Português, English, Español) e acompanhar cada passo.
 
-## Contributing
-Feel free to open *issues* or *pull requests*. Follow the repository's commit style.
+## Contribuindo
+Sinta‑se à vontade para abrir *issues* ou *pull requests*. Siga o padrão de commits do repositório.
 
 ---
 
-Generated with [Claude Code](https://claude.com/claude-code).
+Criado por Tonny Brito - Devlandia Ltda e gerado por Claude Code (2026-03-18).
