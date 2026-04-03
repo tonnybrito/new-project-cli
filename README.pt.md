@@ -15,29 +15,31 @@ Criado por Tonny Brito - Devlandia Ltda e gerado por Claude Code (2026-03-18).
 
 ## Instalação
 ```bash
-# Instalação global via npm
+# Instalação global (Gerencia permissões automaticamente)
+node bin/index.js install
+
+# OU via npm padrão
 npm i -g new-project-cli
 ```
 
 ## Como usar
 ```bash
-# Crie um novo projeto chamado meu-app
-newproj init meu-app          # opcional: --github para criar o repositório no GitHub
+# Crie um novo projeto
+newproj init "meu-app"
+
+# Crie um projeto em uma pasta específica (Ex: Sandbox)
+newproj init "meu-app" --projects-folder ~/"Sandbox"
 
 # Entre na pasta do projeto
 cd meu-app
 
-# Inicie a aplicação (executa `./startApp.sh`)
-# O comando `newproj start` executa o script `./startApp.sh`, que inicia o servidor de desenvolvimento e abre a aplicação no navegador padrão
+# Inicie a aplicação
 newproj start
 
-# Para recarregar a aplicação, execute o script novamente ou pressione Ctrl+R na janela do navegador
-# Caso precise reiniciar o servidor, utilize o comando stop seguido por start
-
-# Pare a aplicação (executa stopApp.sh) – encerra o servidor de desenvolvimento
+# Pare a aplicação
 newproj stop
 
-# Limpe o cache (executa clearCache.sh)
+# Limpe o cache
 newproj clear
 ```
 

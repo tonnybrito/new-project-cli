@@ -1,0 +1,13 @@
+{
+  "name": "project-template",
+  "version": "1.0.0",
+  "description": "Template for new projects",
+  "main": "index.js",
+  "scripts": {
+    "start": "bash startApp.sh",
+    "stop": "bash stopApp.sh",
+    "clear": "bash clearCache.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

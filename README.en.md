@@ -1,3 +1,12 @@
+## Installation
+```bash
+# Global installation (Automatically manages permissions)
+node bin/index.js install
+
+# OR via standard npm
+npm i -g new-project-cli
+```
+
 ## Como usar
 ```bash
 # Crie um novo projeto chamado meu-app

@@ -17,14 +17,20 @@ Criado por Tonny Brito - Devlandia Ltda e gerado por Claude Code (2026-03-18).
 
 ## Instalação
 ```bash
-# Instalação global via npm
+# Instalação global (Gerencia permissões automaticamente)
+node bin/index.js install
+
+# OU via npm padrão
 npm i -g new-project-cli
 ```
 
 ## Como usar
 ```bash
-# Crie um novo projeto chamado meu-app
-newproj init meu-app          # opcional: --github para criar o repositório no GitHub
+# Crie um novo projeto
+newproj init "meu-app"
+
+# Crie um projeto em uma pasta específica (Ex: Sandbox)
+newproj init "meu-app" --projects-folder ~/"Sandbox"
 
 # Entre na pasta do projeto
 cd meu-app

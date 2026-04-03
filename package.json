@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "CLI tool for scaffolding new projects with predefined template",
   "bin": {
-    "newproj": "./bin/index.js"
+    "newproj": "./bin/index.js",
+    "new-project-cli": "./bin/index.js"
   },
   "scripts": {
     "start": "node ./bin/index.js"

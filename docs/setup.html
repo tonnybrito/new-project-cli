@@ -3,92 +3,378 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Setup Guide – new-project-cli</title>
+  <title>Technical Setup Guide – new-project-cli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body{font-family:Arial,sans-serif;margin:2rem;}
-    .lang{float:right;margin-top:-2rem;}
-    .tab{display:inline-block;margin-right:1rem;padding:.5rem 1rem;background:#f0f0f0;border-radius:4px;cursor:pointer;}
-    .tab.active{background:#333;color:#fff;}
-    .content{margin-top:1rem;display:none;}
-    .content.active{display:block;}
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --code-bg: #1e293b;
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.1), transparent);
+      min-height: 100vh;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    h1 { font-weight: 700; font-size: 2rem; letter-spacing: -0.025em; }
+    
+    .lang-selector select {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+    h2::before { content: '>'; font-family: 'JetBrains Mono'; opacity: 0.5; }
+
+    p { margin-bottom: 1rem; color: var(--text-muted); }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--code-bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--accent);
+    }
+
+    pre {
+      background: var(--code-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: #e2e8f0;
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-right: 0.5rem;
+    }
+    .badge-win { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .badge-unix { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+
+    .feature-list { list-style: none; }
+    .feature-list li { margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.75rem; }
+    .feature-list li::before { content: '✓'; color: var(--accent); font-weight: bold; }
+
+    footer { text-align: center; margin-top: 4rem; color: var(--text-muted); font-size: 0.875rem; }
+
+    [data-lang-content] { display: none; }
+    [data-lang-content].active { display: block; }
+
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-  <div class="lang">
-    <select id="langSelect">
-      <option value="en" selected>English</option>
-      <option value="pt">Português</option>
-      <option value="es">Español</option>
-    </select>
-  </div>
-  <h1>Setup Guide</h1>
-  <div id="tabs">
-    <div class="tab active" data-lang="en">English</div>
-    <div class="tab" data-lang="pt">Português</div>
-    <div class="tab" data-lang="es">Español</div>
-  </div>
-  <div id="contents">
-    <div class="content active" data-lang="en">
-      <h2>1. Install Globally</h2>
-      <pre><code>npm i -g new-project-cli</code></pre>
-      <h2>2. Create a Project</h2>
-      <pre><code>newproj init my-app
-</code></pre>
-      <p>You can optionally create a GitHub repo with <code>--github</code> flag.</p>
-      <h2>3. Start / Stop / Clear</h2>
-      <pre><code>cd my-app
+  <div class="container">
+    <header>
+      <h1>new-project-cli <span style="font-weight: 300; opacity: 0.5;">v1.0.0</span></h1>
+      <div class="lang-selector">
+        <div id="tabs">
+          <div class="tab active" data-tab="beginner">Guia para Iniciantes</div>
+          <div class="tab" data-tab="setup">Setup (Technical)</div>
+        </div>
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- English Content -->
+    <div data-lang-content="en" class="active">
+      <!-- Beginner Section -->
+      <div data-tab-content="beginner" class="tab-pane active">
+        <div class="card">
+          <h2>What is this tool? (Simplified)</h2>
+          <p>Imagine you want to build a customized car. Instead of having to manufacture every single screw, the engine, and the wheels from scratch, you use a <strong>factory machine</strong> that instantly gives you the car's frame, wheels, and a working engine.</p>
+          <p><code>new-project-cli</code> is that "factory machine" for software. It creates the <strong>foundation</strong> of your project (folders, basic files, and initial settings) so you can focus only on what makes your project unique.</p>
+          <ul class="feature-list">
+            <li><strong>Saves Time</strong>: What takes 30 minutes to set up manually happens in seconds.</li>
+            <li><strong>Ready to Build</strong>: It even installs the "engines" (dependencies) for you automatically.</li>
+            <li><strong>Remote Control (Item 3)</strong>: It gives you simple "Start", "Stop", and "Clean" buttons for your app, so you don't have to worry about the technical details of the server.</li>
+            <li><strong>Recycle Bin (Item 4)</strong>: A safe way to delete the project folder if you change your mind. It cleans up everything for you.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--accent);">
+          <h2>💡 Summary: Tool vs. Project</h2>
+          <p>Don't confuse the two! <code>new-project-cli</code> is your <strong>factory</strong> (the tool). Once installed globally, you don't need to stay inside this folder.</p>
+          <p>You can generate your <strong>final projects</strong> anywhere on your computer. Just like you install a word processor once and then create many documents in different folders, you install this tool once and generate many projects!</p>
+        </div>
+      </div>
+
+      <!-- Technical Setup Section -->
+      <div data-tab-content="setup" class="tab-pane">
+        <div class="card">
+          <h2>Architecture Overview</h2>
+          <p>A cross-platform binary tool for automated project scaffolding. Built with Node.js, supporting native elevation for administrative tasks.</p>
+          <ul class="feature-list">
+            <li><strong>Native Elevation</strong>: Automatic <code>sudo</code> or UAC (PowerShell) requests.</li>
+            <li><strong>Custom Scoping</strong>: Support for any target directory via <code>--projects-folder</code>.</li>
+            <li><strong>Multi-Runtime</strong>: Detects and executes <code>.sh</code> or <code>.bat</code> based on host environment.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>1. Global Installation</h2>
+          <p>Run the internal install optimizer to handle global path linking and permissions.</p>
+          <pre><code># Using the direct node execution (before global install)
+node bin/index.js install
+
+# OR using standard npm
+npm install -g .</code></pre>
+          <p><span class="badge badge-unix">macOS/Linux</span> Will prompt for <code>sudo</code> if required.</p>
+          <p><span class="badge badge-win">Windows</span> Will trigger a UAC prompt via PowerShell.</p>
+        </div>
+
+        <div class="card">
+          <h2>2. Initializing Projects</h2>
+          <p>Scaffold a new project environment. Values in quotes are examples and should be replaced with your desired naming.</p>
+          <pre><code># Default (Current Working Directory)
+newproj init "my-project-name"
+
+# Custom Path (relative or absolute)
+newproj init "my-project-name" --projects-folder ~/"your-projects-folder"</code></pre>
+          <p><small><i>Note: The <code>--projects-folder</code> flag handles <code>~/</code> for home directory expansion.</i></small></p>
+        </div>
+
+        <div class="card">
+          <h2>3. Lifecycle Commands</h2>
+          <p>Execute predefined lifecycle scripts within the project directory.</p>
+          <pre><code># Run startApp.sh / startApp.bat
 newproj start
+
+# Run stopApp.sh / stopApp.bat
 newproj stop
+
+# Run clearCache.sh / clearCache.bat
 newproj clear
-</code></pre>
+
+# Run destroyProject.sh / destroyProject.bat
+newproj destroy</code></pre>
+          <ul class="feature-list" style="margin-top: 1rem; font-size: 0.9rem;">
+            <li><strong>start</strong>: "Turns on the engine" - launches the dev server and opens your app.</li>
+            <li><strong>stop</strong>: "Turns off the engine" - stops all processes and frees up memory.</li>
+            <li><strong>clear</strong>: "Cleans the house" - removes temporary files and corrupted caches.</li>
+            <li><strong>destroy</strong>: "The Recycle Bin" - safely removes the project folder and cleans up associated files.</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="content" data-lang="pt">
-      <h2>1. Instalar Globalmente</h2>
-      <pre><code>npm i -g new-project-cli</code></pre>
-      <h2>2. Criar um Projeto</h2>
-      <pre><code>newproj init meu-app
-</code></pre>
-      <p>Você pode opcionalmente criar um repositório GitHub com a flag <code>--github</code>.</p>
-      <h2>3. Iniciar / Parar / Limpar</h2>
-      <pre><code>cd meu-app
+
+    <!-- Portuguese Content -->
+    <div data-lang-content="pt">
+      <!-- Seção para Iniciantes -->
+      <div data-tab-content="beginner" class="tab-pane active">
+        <div class="card">
+          <h2>O que é essa ferramenta? (Simplificado)</h2>
+          <p>Imagine que você quer construir uma casa. Em vez de ter que fabricar cada tijolo, viga e telha manualmente, você usa uma <strong>máquina mágica</strong> que monta instantaneamente toda a estrutura básica da casa para você.</p>
+          <p>O <code>new-project-cli</code> é essa "máquina mágica" para os seus projetos de programação. Ele cria a <strong>base</strong> do seu projeto (pastas, arquivos iniciais e configurações) para que você possa focar apenas em construir o que torna o seu projeto único.</p>
+          <ul class="feature-list">
+            <li><strong>Economiza Tempo</strong>: O que levaria 30 minutos organizando manualmente acontece em segundos.</li>
+            <li><strong>Pronto para Construir</strong>: Ele até instala as ferramentas necessárias (dependências) para você automaticamente.</li>
+            <li><strong>Controle Remoto (Item 3)</strong>: Ele te dá botões simples de "Ligar", "Desligar" e "Limpar" para o seu app, para que você não precise lidar com detalhes técnicos de servidores.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--accent);">
+          <h2>💡 Resumo: Ferramenta vs. Projeto</h2>
+          <p>Não confunda as duas coisas! O <code>new-project-cli</code> é a sua <strong>fábrica</strong> (a ferramenta). Depois de instalado globalmente, você não precisa mais ficar dentro desta pasta.</p>
+          <p>Você pode gerar seus <strong>projetos reais</strong> em qualquer lugar do seu computador. Assim como você instala um editor de texto uma vez e depois cria vários documentos em pastas diferentes, você instala esta ferramenta uma vez e gera diversos projetos onde quiser!</p>
+        </div>
+      </div>
+
+      <!-- Seção Técnica (Setup) -->
+      <div data-tab-content="setup" class="tab-pane">
+        <div class="card">
+          <h2>Visão Geral da Arquitetura</h2>
+          <p>Ferramenta binária multiplataforma para scaffolding automatizado. Construída em Node.js, com suporte a elevação nativa para tarefas administrativas.</p>
+          <ul class="feature-list">
+            <li><strong>Elevação Nativa</strong>: Solicitações automáticas de <code>sudo</code> ou UAC (PowerShell).</li>
+            <li><strong>Escopo Personalizado</strong>: Suporte a qualquer diretório via <code>--projects-folder</code>.</li>
+            <li><strong>Multi-Runtime</strong>: Detecta e executa <code>.sh</code> ou <code>.bat</code> conforme o ambiente.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>1. Instalação Global</h2>
+          <p>Execute o otimizador de instalação para gerenciar links globais e permissões.</p>
+          <pre><code># Execução direta (antes da instalação global)
+node bin/index.js install
+
+# OU via npm padrão
+npm install -g .</code></pre>
+          <p><span class="badge badge-unix">macOS/Linux</span> Solicitará <code>sudo</code> se necessário.</p>
+          <p><span class="badge badge-win">Windows</span> Acionará o UAC via PowerShell.</p>
+        </div>
+
+        <div class="card">
+          <h2>2. Inicialização de Projetos</h2>
+          <p>Crie o ambiente de um novo projeto. Os valores entre aspas são exemplos e devem ser substituídos pelo nome e caminho desejados.</p>
+          <pre><code># Padrão (Diretório Atual)
+newproj init "meu-novo-projeto"
+
+# Caminho Personalizado (relativo ou absoluto)
+newproj init "meu-novo-projeto" --projects-folder ~/"seu-diretorio-de-projetos"</code></pre>
+          <p><small><i>Nota: A flag <code>--projects-folder</code> suporta <code>~/</code> para expansão da pasta do usuário.</i></small></p>
+        </div>
+
+        <div class="card">
+          <h2>3. Comandos de Ciclo de Vida (Lifecycle)</h2>
+          <p>Execute scripts predefinidos dentro do diretório do projeto. A ferramenta detecta automaticamente se você está no Windows ou Mac/Linux.</p>
+          <pre><code># Inicia o servidor de desenvolvimento
 newproj start
+
+# Encerra processos e libera portas/memória
 newproj stop
+
+# Remove arquivos temporários e caches corrompidos
 newproj clear
-</code></pre>
+
+# Exclui o projeto permanentemente (pede confirmação)
+newproj destroy</code></pre>
+          <ul class="feature-list" style="margin-top: 1rem; font-size: 0.9rem;">
+            <li><strong><code>newproj start</code> (Ligar)</strong>: "Gira a chave do seu app" - liga o servidor e abre o site no seu navegador.</li>
+            <li><strong><code>newproj stop</code> (O Botão de Desligar)</strong>: Ele encerra tudo o que estiver rodando. Use isso quando terminar o dia para "apagar as luzes" e economizar recursos do seu computador.</li>
+            <li><strong><code>newproj clear</code> (O Botão de Faxina)</strong>: Às vezes, o computador guarda arquivos temporários (lixo) que podem travar as coisas. Esse comando faz uma limpeza completa para que tudo volte a funcionar perfeitamente.</li>
+            <li><strong><code>newproj destroy</code> (A Lixeira)</strong>: Se você desistir do projeto, esse comando apaga a pasta inteira com segurança. É o "botão de descarte" para manter seu computador organizado.</li>
+          </ul>
+          <p><small><i>Nota: Estes comandos buscam pelos arquivos <code>startApp</code>, <code>stopApp</code>, <code>clearCache</code> e <code>deleteProject</code> (.sh ou .bat) na pasta atual.</i></small></p>
+        </div>
+      </div>
     </div>
-    <div class="content" data-lang="es">
-      <h2>1. Instalar Globalmente</h2>
-      <pre><code>npm i -g new-project-cli</code></pre>
-      <h2>2. Crear un Proyecto</h2>
-      <pre><code>newproj init mi-app
-</code></pre>
-      <p>Puede crear opcionalmente un repositorio GitHub con la bandera <code>--github</code>.</p>
-      <h2>3. Iniciar / Detener / Limpiar</h2>
-      <pre><code>cd mi-app
-newproj start
-newproj stop
-newproj clear
-</code></pre>
+
+    <!-- Español Content -->
+    <div data-lang-content="es">
+      <!-- Sección para Principiantes -->
+      <div data-tab-content="beginner" class="tab-pane active">
+        <div class="card">
+          <h2>¿Qué es esta herramienta? (Simplificado)</h2>
+          <p>Imagine que desea construir un automóvil personalizado. En lugar de fabricar cada tornillo, el motor y las ruedas desde cero, utiliza una <strong>máquina de fábrica</strong> que le entrega instantáneamente el chasis, las ruedas y un motor en funcionamiento.</p>
+          <p><code>new-project-cli</code> es esa "máquina de fábrica" para software. Crea la <strong>base</strong> de su proyecto (carpetas, archivos básicos y configuraciones iniciales) para que pueda enfocarse solo en lo que hace que su proyecto sea único.</p>
+          <ul class="feature-list">
+            <li><strong>Ahorra Tiempo</strong>: Lo que toma 30 minutes manualmente sucede en segundos.</li>
+            <li><strong>Listo para Construir</strong>: Incluso instala los "motores" (dependencias) de forma automática.</li>
+            <li><strong>Control Remoto (Item 3)</strong>: Le brinda botones simples de "Iniciar", "Detener" y "Limpiar" para su aplicación.</li>
+            <li><strong>Papelera (Item 4)</strong>: Una forma segura de eliminar la carpeta del proyecto si cambia de opinión.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--accent);">
+          <h2>💡 Resumen: Herramienta vs. Proyecto</h2>
+          <p>¡No confunda los dos! <code>new-project-cli</code> es su <strong>fábrica</strong> (la herramienta). Una vez instalada globalmente, no necesita quedarse dentro de esta carpeta.</p>
+          <p>Puede generar sus <strong>proyectos finales</strong> en cualquier lugar de su computadora.</p>
+        </div>
+      </div>
+
+          <ul class="feature-list" style="margin-top: 1rem; font-size: 0.9rem;">
+            <li><strong>start</strong>: "Enciende el motor" - inicia el servidor y abre tu app.</li>
+            <li><strong>stop</strong>: "Apaga el motor" - detiene los procesos y libera memoria.</li>
+            <li><strong>clear</strong>: "Limpia la casa" - elimina archivos temporales y cachés.</li>
+            <li><strong>destroy</strong>: "La Papelera" - elimina la carpeta del proyecto de forma permanente.</li>
+          </ul>
+          <p><small><i>Note: These commands look for <code>startApp</code>, <code>stopApp</code>, <code>clearCache</code>, and <code>deleteProject</code> (.sh or .bat) files in the current folder.</i></small></p>
+        </div>
+      </div>
     </div>
+
+    <footer>
+      <p>Created by Tonny Brito - Devlandia Ltda &copy; 2026</p>
+    </footer>
   </div>
-  <script>
+
+    <script>
+    const langSelect = document.getElementById('langSelect');
+    const langContents = document.querySelectorAll('[data-lang-content]');
     const tabs = document.querySelectorAll('.tab');
-    const contents = document.querySelectorAll('.content');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-        tab.classList.add('active');
-        const lang = tab.dataset.lang;
-        document.querySelector(`.content[data-lang="${lang}"]`).classList.add('active');
-        document.getElementById('langSelect').value = lang;
+    const tabContents = document.querySelectorAll('.tab-pane');
+
+    // Language switching
+    langSelect.addEventListener('change', (e) => {
+      const selectedLang = e.target.value;
+      langContents.forEach(content => {
+        content.classList.toggle('active', content.getAttribute('data-lang-content') === selectedLang);
       });
     });
-    document.getElementById('langSelect').addEventListener('change', e => {
-      const lang = e.target.value;
-      tabs.forEach(t => t.classList.toggle('active', t.dataset.lang === lang));
-      contents.forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+
+    // Tab switching
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.getAttribute('data-tab');
+        tabs.forEach(t => t.classList.toggle('active', t === tab));
+        tabContents.forEach(pane => {
+          pane.classList.toggle('active', pane.getAttribute('data-tab-content') === targetTab);
+        });
+      });
     });
+
+    // Auto-detect browser language
+    const browserLang = navigator.language.split('-')[0];
+    if (['en', 'pt', 'es'].includes(browserLang)) {
+      langSelect.value = browserLang;
+      langSelect.dispatchEvent(new Event('change'));
+    }
   </script>
 </body>
 </html>
